@@ -28,7 +28,7 @@ router.post('/api/users/signup',
       // generate JWT and then store it on session object
       const userJwt = jwt.sign({ id : user.id , email : user.email } , process.env.JWT_KEY!);
       req.session = { jwt : userJwt };
-
+      
       res.status(201).send(user);
   }
 );
