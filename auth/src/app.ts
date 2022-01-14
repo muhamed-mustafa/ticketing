@@ -5,8 +5,7 @@ import { currentUserRouter } from './routes/current-user';
 import { signUpRouter } from './routes/signup';
 import { signinRouter } from './routes/signin';
 import { signoutRouter } from './routes/signout';
-import { errorHandler } from './middlewares/error-handler';
-import { NotFoundError } from '../errors/not-found-error';
+import { errorHandler , NotFoundError } from '@mootickets/common';
 import cookieSession from 'cookie-session';
 
 const app = express();

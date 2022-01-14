@@ -5,7 +5,7 @@ import request from 'supertest';
 
 declare global
 {
-    function signin() : Promise<string[]> 
+    function signup() : Promise<string[]> 
 }
 
 let mongo : any;
@@ -38,7 +38,7 @@ afterAll(async() =>
     await mongoose.connection.close();
 });
 
-global.signin = async () =>
+global.signup = async () =>
 {
     const email = 'test@test.com';
     const password = 'password';
