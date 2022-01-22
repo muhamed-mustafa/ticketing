@@ -26,3 +26,12 @@ build :
           - src  : 'src/**/*.ts'
             dest : .
 
+    - image : muhammedmustafa/orders
+      context : orders
+      docker :
+        dockerfile : Dockerfile
+      sync :
+        manual :
+          - src  : 'src/**/*.ts'
+            dest : .
+
