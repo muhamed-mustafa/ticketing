@@ -1,6 +1,7 @@
 import express , { Request , Response } from "express";
 import { requireAuth , validateRequest , NotAuthorizedError , NotFoundError } from '@mootickets/common';
 import { body } from "express-validator";
+import { BadRequestError } from "@mootickets/common";
 import { Ticket } from '../models/ticket';
 import { TicketUpdatedPublisher } from "../../events/publishers/ticket-updated-publisher";
 import { natsWrapper } from "../nats-wrapper";
@@ -22,13 +23,19 @@ router.put('/api/tickets/:id' , requireAuth , [body('title').not().isEmpty().wit
         throw new NotAuthorizedError();
     }
 
+    if(ticket.orderId)
+    {
+        throw new BadRequestError('Cannot edit a reserved ticket');
+    }
+
     ticket.set({ title : req.body.title , price : req.body.price });
     await ticket.save();
     await new TicketUpdatedPublisher(natsWrapper.client).publish({
         id : ticket.id,
         title : ticket.title,
         price : ticket.price,
-        userId : ticket.userId
+        userId : ticket.userId,
+        version : ticket.version
     });
     
     res.send(ticket);

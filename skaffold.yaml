@@ -35,3 +35,11 @@ build :
           - src  : 'src/**/*.ts'
             dest : .
 
+    - image : muhammedmustafa/exipration
+      context : expiration
+      docker :
+        dockerfile : Dockerfile
+      sync :
+        manual :
+          - src  : 'src/**/*.ts'
+            dest : .

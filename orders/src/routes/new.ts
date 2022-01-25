@@ -7,7 +7,7 @@ import { Order , OrderStatus } from '../models/order';
 import { natsWrapper } from '../nats-wrapper';
 import { OrderCreatedPublisher } from '../events/publishers/order-created-publisher';
 
-const EXPIRATION_WINDOW_SECONDS = 15 * 60;
+const EXPIRATION_WINDOW_SECONDS = 1 * 60;
 
 const router = express.Router();
 
@@ -48,6 +48,7 @@ router.post('/api/orders' , requireAuth , [ body('ticketId').not().isEmpty().cus
         id : order.id,
         status : order.status,
         userId : order.userId,
+        version : order.version,
         expiresAt : order.expiresAt.toISOString(),
         ticket :
         {
