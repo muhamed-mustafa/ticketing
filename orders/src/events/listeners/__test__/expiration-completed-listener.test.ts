@@ -20,7 +20,7 @@ const setup = async () =>
 
     const order = Order.build({
         userId : "randomId",
-        status : OrderStatus.Complete,
+        status : OrderStatus.Created,
         expiresAt : new Date(),
         ticket
     });

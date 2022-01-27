@@ -10,6 +10,15 @@ spec :
     - host : ticketing.dev 
       http :
         paths :
+        
+          - path : /api/payments/?(.*)
+            pathType : Prefix
+            backend :
+              service :
+                name : payments-srv
+                port :
+                  number : 3000
+
           - path : /api/user/?(.*)
             pathType : Prefix
             backend :
@@ -17,6 +26,7 @@ spec :
                 name : auth-srv
                 port :
                   number : 3000
+
           - path : /api/tickets/?(.*)
             pathType : Prefix
             backend :
@@ -24,6 +34,7 @@ spec :
                 name : tickets-srv
                 port :
                   number : 3000
+
           - path : /api/orders/?(.*)
             pathType : Prefix
             backend :
